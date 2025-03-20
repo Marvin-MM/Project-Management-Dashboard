@@ -211,7 +211,7 @@ const Sidebar = () => {
           </>
         )}
       </div>
-      <div className="mt-20 flex w-full items-center gap-4 bg-white px-8 py-4 mb-3 dark:bg-black md:hidden">
+      <div className="mt-32 flex w-full items-center gap-4 bg-white px-8 py-4 mb-3 dark:bg-black md:hidden">
         <div className="flex w-full items-center">
           <div className="align-center flex h-9 w-9 justify-center">
             {imageUrl ? (
