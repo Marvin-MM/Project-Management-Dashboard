@@ -28,19 +28,27 @@ const columns: GridColDef[] = [
     field: "profilePictureUrl",
     headerName: "Profile Picture",
     width: 100,
-    renderCell: (params) => (
-      <div className="flex h-full w-full items-center justify-center">
-        <div className="h-9 w-9">
-          <Image
-            src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${params.value}`}
-            alt={params.row.username}
-            width={100}
-            height={50}
-            className="h-full rounded-full object-cover"
-          />
+    renderCell: (params) => {
+      // Construct the image path directly using profilePictureUrl
+      const imageSrc = `/${params.value}`;
+      return (
+        <div className="flex h-full w-full items-center justify-center">
+          <div className="h-9 w-9">
+            <Image
+              src={imageSrc}
+              alt={params.row.username}
+              width={100}
+              height={50}
+              className="h-full rounded-full object-cover"
+              onError={(e) => {
+                // Fallback to a default image if the image fails to load
+                e.currentTarget.src = "/default-profile.png";
+              }}
+            />
+          </div>
         </div>
-      </div>
-    ),
+      );
+    },
   },
 ];
 

@@ -175,7 +175,7 @@ const Task = ({ task }: TaskProps) => {
     >
       {task.attachments && task.attachments.length > 0 && (
         <Image
-          src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.attachments[0].fileURL}`}
+          src={"/i1.jpg"}
           alt={task.attachments[0].fileName}
           width={400}
           height={200}
@@ -227,21 +227,29 @@ const Task = ({ task }: TaskProps) => {
             {task.assignee && (
               <Image
                 key={task.assignee.userId}
-                src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.assignee.profilePictureUrl!}`}
+                src={`/${task.assignee.profilePictureUrl!}`} // Use profilePictureUrl from the public folder
                 alt={task.assignee.username}
                 width={30}
                 height={30}
                 className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"
+                onError={(e) => {
+                  // Fallback to a default image if the image fails to load
+                  e.currentTarget.src = "/default-profile.png";
+                }}
               />
             )}
             {task.author && (
               <Image
                 key={task.author.userId}
-                src={`https://pm-s3-images.s3.us-east-2.amazonaws.com/${task.author.profilePictureUrl!}`}
+                src={`/${task.author.profilePictureUrl!}`} // Use profilePictureUrl from the public folder
                 alt={task.author.username}
                 width={30}
                 height={30}
                 className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"
+                onError={(e) => {
+                  // Fallback to a default image if the image fails to load
+                  e.currentTarget.src = "/default-profile.png";
+                }}
               />
             )}
           </div>
